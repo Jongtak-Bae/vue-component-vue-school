@@ -5,7 +5,12 @@ let planComponent={
       type: String,
       required: true
     }
+  },
+  methods:{
+    select(){
+      return console.log('selected')
   }
+}
 }
 
 let planPickerComponent={
