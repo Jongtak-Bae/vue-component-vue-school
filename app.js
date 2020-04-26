@@ -1,23 +1,33 @@
-Vue.component('plan-picker',{
+let planComponent={
+  template: '#plan-template',
+  props: {
+    name: {
+      type: String,
+      required: true
+    }
+  }
+}
+
+let planPickerComponent={
   template:'#plan-picker-template',
+  components:{
+    plan:planComponent
+  },
   data(){
     return {
       plans: ['The Single', 'The Curious', 'The Addict']
     }
   }
-})
+}
 
-Vue.component('plan', {
-   template: '#plan-template',
-   props: {
-     name: {
-       type: String,
-       required: true
-     }
-   }
- })
+
+
+
 
  new Vue({
    el: '#app',
+   components:{
+     'plan-picker':planPickerComponent
+   }
 
  })
