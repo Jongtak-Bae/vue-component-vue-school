@@ -1,3 +1,4 @@
-.active-plan{
-  background-color: red
+.done{
+  color:green;
+  text-decoration:line-through;
 }

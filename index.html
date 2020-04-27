@@ -5,39 +5,59 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Vue.js Components Fundamentals</title>
+  <title>Vue.js Slots Fundamentals</title>
 </head>
 
 <body>
   <div id="app" class="container mx-auto py-6">
     <div class="content">
-      <h1 class="title">Coffee Plans</h1>
+      <h1 class="title">Vue.js Slots Fundamentals</h1>
+      <todo-item>
+        Buy bananas
+        <template v-slot:description>
 
-      <h2 class="subtitle">
-        We travel the world to source the very best single origin coffee for you
-      </h2>
-<plan-picker></plan-picker>
+          <p>
+            Bananas are good for your health!
+          </p>
 
+        </template>
+        <template #button-text>
+          highlight
+
+        </template>
+      </todo-item>
+      <todo-item>
+        Buy bananas
+        <template v-slot:description>
+
+          <p>
+            Bananas are good for your health!
+          </p>
+
+        </template>
+
+      </todo-item>
 
 
 
     </div>
   </div>
-  <script type="text/x-template" id="plan-picker-template">
-    <div class="plans">
-      <plan v-for="plan in plans" :selected-plan="selectedPlan" :name="plan" @select="selectPlan"></plan>
-    </div>
-    </script>
 
-  <script type="text/x-template" id="plan-template">
-    <div class="plan" @click ="select"  :class="{'active-plan':isSelected}">
-         <div class="description">
-           <span class="title">
-             {{name}}
-           </span>
-         </div>
-       </div>
-   </script>
+
+  <script type="text/x-template" id="todo-item-template">
+    <div>
+      <input type="checkbox" v-model="completed">
+      <span :class="{done:completed}">
+        <slot></slot>
+      </span>
+      <slot name="description"></slot>
+      <button>
+        <slot name="button-text">OK</slot>
+      </button>
+
+    </div>
+  </script>
+
 
 
   <script src="https://unpkg.com/vue"></script>
