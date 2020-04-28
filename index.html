@@ -1,49 +1,72 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Vue.js Components Fundamentals</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
 </head>
 
 <body>
-  <div id="app" class="container mx-auto py-6">
-    <div class="content">
-      <h1 class="title">Coffee Plans</h1>
 
-      <h2 class="subtitle">
-        We travel the world to source the very best single origin coffee for you
-      </h2>
-<plan-picker></plan-picker>
+  <div id="app" class="ui container">
+    <h1>Notification Center</h1>
+    <notification-message type="error" header="Oh no!">
+        <p>Go to the <b>special offers</b> page to see now.</p>
+    </notification-message>
+    <notification-message type="success" header="Oh no!">
+        <p>Go to the <b>special offers</b> page to see now.</p>
+    </notification-message>
+    <notification-message>
+      Good Morning!
+    </notification-message>
 
 
 
-
-    </div>
   </div>
-  <script type="text/x-template" id="plan-picker-template">
-    <div class="plans">
-      <plan v-for="plan in plans" :name="plan"></plan>
+
+  <!-- Template for Notification Message -->
+  <script type="text/x-template" id="notification-message-template">
+    <!-- Notification Message Markup -->
+    <!-- Types: info, warning, error, success -->
+    <div class="ui message" :class="type">
+      <i class="close icon" @click="hide"></i>
+      <div class="header">
+        {{header}}
+      </div>
+      <slot></slot>
     </div>
-    </script>
+  </script>
 
-  <script type="text/x-template" id="plan-template">
-    <div class="plan">
-         <div class="description">
-           <span class="title">
-             {{name}}
-           </span>
-         </div>
-       </div>
-   </script>
-
-
+  <!-- Import Vue.js -->
   <script src="https://unpkg.com/vue"></script>
-  <script src="app.js"></script>
-  <link rel="stylesheet" href="style.css">
 
+  <!-- Your JavaScript Code :) -->
+  <script>
+  Vue.component('notification-message',{
+    template:'#notification-message-template',
+    props:{
+      type:{
+        type:String,
+        default:'info'
+      },
+      header:{
+        type:String,
+        default:'Information'
+      }
+    },
+    data(){
+      return {
+        hidden:false
+      }
+    },
+    methods:{
+      hide(){
+        this.hidden=true
+      }
+    }
+  })
+    new Vue({
+      el: '#app'
+    })
+  </script>
 </body>
 
 </html>
